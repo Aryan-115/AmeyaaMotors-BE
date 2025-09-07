@@ -13,6 +13,7 @@ const { connectDb } = require('./db/connection');
 
 const allowedOrigins = [
   process.env.CLIENT_URL,        // Vercel domain
+  process.env.CUSTOM_DOMAIN,  // Custom domain
 ];
 
 app.use(cors({
