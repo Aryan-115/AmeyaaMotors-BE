@@ -13,7 +13,6 @@ const { connectDb } = require('./db/connection');
 
 const allowedOrigins = [
   process.env.CLIENT_URL,        // Vercel domain
-  "https://www.ameyaamotorsev.com"       // GoDaddy custom domain
 ];
 
 app.use(cors({
