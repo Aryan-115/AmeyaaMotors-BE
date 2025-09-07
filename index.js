@@ -1,3 +1,4 @@
+import cors from "cors";
 const express =  require('express');
 
 const app = express();
@@ -11,7 +12,21 @@ const { readdirSync } = require('fs');
 const { connectDb } = require('./db/connection');
 
 
-app.use(cors({ origin: process.env.CLIENT_URL }));
+const allowedOrigins = [
+  process.env.CLIENT_URL,        // Vercel domain
+  "https://www.ameyaamotorsev.com"       // GoDaddy custom domain
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 connectDb();
